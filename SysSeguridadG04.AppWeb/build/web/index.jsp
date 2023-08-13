@@ -1,9 +1,14 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="sysseguridadg04.appweb.utils.*"%>
+<% //if (SessionUser.isAuth(request) == false) {
+         response.sendRedirect("Rol?accion=create");
+    //}
+%>
 <!DOCTYPE html>
 <html>
     <head>        
         <jsp:include page="/Views/Shared/title.jsp" />
-        <title>Error de la aplicación</title>
+        <title>Home</title>
 
     </head>
     <body>
@@ -11,8 +16,8 @@
         <main class="container"> 
             <div class="row">
                 <div class="col l12 s12">
-                    <h4>Succedio el siguiente error en la aplicación</h4> 
-                    <span style="color: red"><%= request.getAttribute("error") %></span> 
+                    <h1>Bienvenidos</h1> 
+                    <span>Al sistema para aprender a como colocarle seguridad a sus aplicaciones web</span> 
                 </div>
             </div>            
         </main>

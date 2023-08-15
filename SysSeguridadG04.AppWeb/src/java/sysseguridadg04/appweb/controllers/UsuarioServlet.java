@@ -101,7 +101,7 @@ public class UsuarioServlet extends HttpServlet {
         try
         {
             Usuario usuario = obtenerUsuario(request);
-            Usuario usuario_auth = new Usuario();//Cambiar esta linea
+            Usuario usuario_auth = UsuarioDAL.login(usuario);//Cambiar esta linea
             if(usuario_auth.getId() != 0 && 
                usuario_auth.getLogin().equals(usuario.getLogin()))
             {

@@ -173,4 +173,39 @@ public static String encriptarMD5(String txt) throws Exception
             throw ex;// enviar al siguiente metodo el error al obtener ResultSet de la clase ComunDB   en el caso que suceda 
         }
     }
+     
+    public static Usuario login(Usuario pUsuario) throws Exception
+    {
+        Usuario usuario = new Usuario();
+        ArrayList<Usuario> usuarios = new ArrayList();
+        String password = encriptarMD5(pUsuario.getPassword());
+        try(Connection conn = ComunDB.obtenerConexion();)
+        {
+            String sql = obtenerSelect(pUsuario);
+            sql += " Where u.Login = ? And u.Password = ? And "
+                    + "u.Estatus = ? ";
+            try(PreparedStatement ps = ComunDB.createPreparedStatement(conn, sql);)
+            {
+                ps.setString(1, pUsuario.getLogin());
+                ps.setString(2, password);
+                ps.setByte(3, Byte.parseByte("1"));
+                obtenerDatos(ps, usuarios);
+                ps.close();
+            }
+            catch(SQLException ex)
+            {
+                throw ex;
+            }
+            conn.close();
+        }
+        catch(SQLException ex)
+        {
+            throw ex;
+        }
+        if(usuarios.size() > 0)
+        {
+            usuario = usuarios.get(0);
+        }
+        return usuario;
+    }
 }

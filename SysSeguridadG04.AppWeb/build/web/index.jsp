@@ -9,7 +9,6 @@
     <head>        
         <jsp:include page="/Views/Shared/title.jsp" />
         <title>Home</title>
-
     </head>
     <body>
         <jsp:include page="/Views/Shared/headerBody.jsp" />  

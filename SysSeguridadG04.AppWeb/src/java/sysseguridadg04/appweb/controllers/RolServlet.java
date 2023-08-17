@@ -142,7 +142,8 @@ public class RolServlet extends HttpServlet {
     }
     
     protected void doGetRequestEdit(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException 
+    {
             requestObtenerPorId(request, response);
             request.getRequestDispatcher("Views/Rol/edit.jsp")
                     .forward(request, response);

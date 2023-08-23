@@ -10,7 +10,7 @@
         <jsp:include page="/Views/Shared/headerBody.jsp" />
         <main>
             <h5>Crear Usuario</h5>
-            <form action="Usuario" method="post">
+            <form action="Usuario" method="post" onsubmit="return validarFormulario()">
                 <input type="hidden" name="accion" 
                        value="<%=request.getAttribute("accion")%>" id="txtHidden">
                 <div class="row">
@@ -76,5 +76,83 @@
             </form>
         </main>
         <jsp:include page="/Views/Shared/footerBody.jsp" />
+        <script>
+            function validarFormulario()
+            {
+                var result = true;
+                var txtPassword = $("#txtPassword").val();
+                var txtConfirmPassword = $("#txtConfirmPassword_aux").val();
+                var txtEstatus = $("#slEstatus").val();
+                var txtRol = $("#slRol").val();
+                
+                if(txtPassword != txtConfirmPassword)
+                {
+                    $("#txtConfirmPassword_aux_error").empty();
+                    $("#txtConfirmPassword_aux_error")
+                    .append("El Password y Confirmar password deben ser iguales");
+                    result = false;
+                }
+                else
+                {
+                    $("#txtConfirmPassword_aux_error").empty();
+                }
+                
+                if(parseInt(txtEstatus) == 0)
+                {
+                    $("#slEstatus_error").empty();
+                    $("#slEstatus_error")
+                    .append("El estatus el Obligatorio");
+                    result = false;
+                }
+                else
+                {
+                    $("#slEstatus_error").empty();
+                }
+                
+                if(parseInt(txtRol) == 0)
+                {
+                    $("#slRol_error").empty();
+                    $("#slRol_error")
+                    .append("El Rol el Obligatorio");
+                    result = false;
+                }
+                else
+                {
+                    $("#slRol_error").empty();
+                }
+                return result;
+            }
+            
+            <%--function validarFormulario() {
+                var result = true;
+                var txtPassword = document.getElementById("txtPassword");
+                var txtConfirm_password = document.getElementById("txtConfirmPassword_aux");
+                var txtConfirm_password_error = document.getElementById("txtConfirmPassword_aux_error");
+                var slEstatus = document.getElementById("slEstatus");
+                var slEstatus_error = document.getElementById("slEstatus_error");
+                var slRol = document.getElementById("slRol");
+                var slRol_error = document.getElementById("slRol_error");
+                if (txtPassword.value != txtConfirm_password.value) {
+                    txtConfirm_password_error.innerHTML = "El password y confirmar password debe ser iguales";
+                    result = false;
+                } else {
+                    txtConfirm_password_error.innerHTML = "";
+                }
+                if (slEstatus.value == 0) {
+                    slEstatus_error.innerHTML = "El estatus es obligatorio";
+                    result = false;
+                } else {
+                    slEstatus_error.innerHTML = "";
+                }
+                if (slRol.value == 0) {
+                    slRol_error.innerHTML = "El Rol es obligatorio";
+                    result = false;
+                } else {
+                    slRol_error.innerHTML = "";
+                }
+
+                return result;
+            }--%>
+        </script>
     </body>
 </html>
